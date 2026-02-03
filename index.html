@@ -5,167 +5,18 @@
   <title>Skyreach</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- PWA manifest -->
-  <link rel="manifest" href="manifest.json" />
+  <!-- Immediate meta redirect as fallback -->
+  <meta http-equiv="refresh" content="0; url=https://skyreach.base44.app" />
 
-  <!-- Theme / status bar colors (also used for splash) -->
-  <meta name="theme-color" content="#0b1020" />
-
-  <!-- Fallback favicon (your own icon here) -->
-  <link rel="icon" type="image/png" href="icons/icon-192.png" />
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #0b1020;
-      --accent: #4c8dff;
-      --text: #f5f7ff;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      overflow: hidden;
-    }
-
-    #app {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg);
-    }
-
-    .splash {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      animation: fadeOut 0.4s ease forwards;
-      animation-delay: 1.2s;
-    }
-
-    .splash-logo {
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
-      background: radial-gradient(circle at 30% 30%, #6ba4ff, #1c2b4f);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 2.2rem;
-      letter-spacing: 0.06em;
-    }
-
-    .splash-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-
-    .splash-sub {
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-
-    .splash-bar {
-      width: 120px;
-      height: 3px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-      position: relative;
-      margin-top: 0.5rem;
-    }
-
-    .splash-bar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 40%;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation: bar 1.2s infinite ease-in-out;
-    }
-
-    iframe#app-frame {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-      background: #000;
-    }
-
-    .visible {
-      display: block !important;
-    }
-
-    @keyframes bar {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(20%); }
-      100% { transform: translateX(120%); }
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        transform: translateY(10px);
-        pointer-events: none;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <div class="splash" id="splash">
-      <div class="splash-logo">
-        SR
-      </div>
-      <div class="splash-title">Skyreach</div>
-      <div class="splash-sub">Launching workspace…</div>
-      <div class="splash-bar"></div>
-    </div>
-  </div>
-
-  <iframe
-    id="app-frame"
-    src="https://skyreach.base44.app"
-    title="Skyreach"
-    loading="eager"
-  ></iframe>
+  <!-- Favicon (replace with your own path if you host an icon locally) -->
+  <link rel="icon" type="image/png" href="icon.png" />
 
   <script>
-    // Promote to standalone-like PWA via service worker (optional but recommended)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
-      });
-    }
-
-    const splash = document.getElementById('splash');
-    const frame = document.getElementById('app-frame');
-
-    // When iframe has loaded, show it and hide splash
-    frame.addEventListener('load', () => {
-      frame.classList.add('visible');
-      // Give CSS fade-out a moment then remove splash container
-      setTimeout(() => {
-        splash.remove();
-        document.getElementById('app').remove();
-      }, 500);
-    });
-
-    // Safety timeout: if load event is slow or blocked, still swap after a bit
-    setTimeout(() => {
-      frame.classList.add('visible');
-      try { splash.remove(); document.getElementById('app').remove(); } catch(e) {}
-    }, 4000);
+    // Fast JS redirect; replace() avoids leaving this page in history
+    window.location.replace("https://skyreach.base44.app");
   </script>
+</head>
+<body>
+  <p>If you are not redirected, <a href="https://skyreach.base44.app">click here</a>.</p>
 </body>
 </html>
